@@ -85,8 +85,8 @@ class RingBuffer {
 
   ValueType &Front() { return data_[tail_]; }
   ValueType const &Front() const { return data_[tail_]; }
-  ValueType &Back() { return data_[Next(head_)]; }
-  ValueType const &Back() const { return data_[Next(head_)]; }
+  ValueType &Back() { return data_[Prev(head_)]; }
+  ValueType const &Back() const { return data_[Prev(head_)]; }
   bool Full() const { return Next(head_) == tail_; }
   bool Empty() const { return head_ == tail_; }
   int Capacity() const { return max_length_ - 1; };
