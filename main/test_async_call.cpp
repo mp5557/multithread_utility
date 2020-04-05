@@ -18,7 +18,7 @@ int main() {
   while (std::cin >> x) {
     if (x < 0)
       break;
-    caller->Call(std::make_unique<int>(x), time_stamp);
+    caller->Call(std::unique_ptr<int>(new int(x)), time_stamp);
     fmt::print("after call: ptr = {}, time_stamp = {}\n", x, time_stamp);
     time_stamp++;
   }

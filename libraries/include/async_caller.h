@@ -4,6 +4,7 @@
 #include <functional>
 #include <memory>
 #include <tuple>
+#include <thread>
 
 #include "async_buffer.h"
 #include "index_generator.h"
@@ -67,8 +68,8 @@ class AsyncCaller<F, std::tuple<Tuples...>> {
 };
 
 template <typename F>
-auto MakeAsyncCaller(F f) {
-  using Args = detail::FunctionTraits<F>::ArgTypes;
+auto MakeAsyncCaller(F f) -> std::unique_ptr<AsyncCaller<decltype(f), typename detail::FunctionTraits<F>::ArgTypes> >{
+  using Args = typename detail::FunctionTraits<F>::ArgTypes;
   using Caller = AsyncCaller<decltype(f), Args>;
   return std::unique_ptr<Caller>(new Caller(f));
 }

@@ -13,7 +13,7 @@ template <typename Buffer, typename TimeStamp>
 typename Buffer::ConstIterator FindByTimestamp(Buffer const &buffer,
                                                TimeStamp time_stamp) {
   return std::find_if(buffer.begin(), buffer.end(),
-                      [time_stamp](Buffer::ValueType const &v) {
+                      [time_stamp](typename Buffer::ValueType const &v) {
                         return v.first >= time_stamp;
                       });
 }
@@ -35,7 +35,7 @@ class SynchronizedBuffer {
   static constexpr int kSize = sizeof...(Tuples);
 
   template <int N>
-  using EleType = std::tuple_element_t<N, Types>;
+  using EleType = typename std::tuple_element<N, Types>::type;
 
   enum ErrorCode { kSuccess, kTimeout };
 

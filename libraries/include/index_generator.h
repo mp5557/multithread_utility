@@ -30,7 +30,7 @@ inline T ReduceImpl(Op op, T res, Tuple const &a, IndicesHolder<I...>) {
 
 template <typename Op, typename T, typename Tuple>
 inline T Reduce(Op op, T res, Tuple const &a) {
-  return ReduceImpl(op, res, a, IndicesGeneratorT<std::tuple_size_v<Tuple>>());
+  return ReduceImpl(op, res, a, IndicesGeneratorT<std::tuple_size<Tuple>::value>());
 }
 
 template <typename T>

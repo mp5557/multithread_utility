@@ -52,7 +52,7 @@ class RingBufferIterator {
   }
 
   friend RB;
-  friend typename RingBufferIterator<RB, !is_const>;
+  friend class RingBufferIterator<RB, !is_const>;
 
  private:
   RingBufferPointer buffer_ = nullptr;
@@ -68,8 +68,8 @@ class RingBuffer {
   using Iterator = detail::RingBufferIterator<Type, false>;
   using ConstIterator = detail::RingBufferIterator<Type, true>;
 
-  friend typename Iterator;
-  friend typename ConstIterator;
+  friend class detail::RingBufferIterator<Type, false>;
+  friend class detail::RingBufferIterator<Type, true>;
 
   explicit RingBuffer(int capacity = 5) : max_length_(capacity + 1) {}
 
