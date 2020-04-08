@@ -51,8 +51,7 @@ class AsyncCaller<F, std::tuple<Tuples...>> {
   }
 
  public:
-  AsyncCaller(F f) : f_(f) {
-    std::atomic_init(&exit_flag_, false);
+  AsyncCaller(F f) : f_(f), exit_flag_(false) {
     thread_ = std::thread(&AsyncCaller::Run, this);
   }
 
